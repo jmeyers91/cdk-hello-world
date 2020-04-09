@@ -1,0 +1,10 @@
+#!/bin/bash
+
+npm run build
+rm -rf local-image
+mkdir local-image
+
+cp Dockerfile local-image
+cp package.json local-image
+cp package-lock.json local-image
+cp -R lib local-image
