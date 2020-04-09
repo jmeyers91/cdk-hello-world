@@ -5,10 +5,10 @@
     "cdk-hello-world": "lib/cdk-stack.js"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "./build",
     "watch": "tsc -w",
     "test": "jest",
-    "cdk": "cdk"
+    "deploy": "cdk deploy"
   },
   "devDependencies": {
     "@aws-cdk/assert": "1.32.0",

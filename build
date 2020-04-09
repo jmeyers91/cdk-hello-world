@@ -1,6 +1,6 @@
 #!/bin/bash
 
-npm run build
+tsc
 rm -rf local-image
 mkdir local-image
 

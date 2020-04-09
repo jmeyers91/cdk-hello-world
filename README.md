@@ -1,14 +1,19 @@
-# Welcome to your CDK TypeScript project!
+# CDK Hello World
 
-This is a blank project for TypeScript development with CDK.
+A basic Node webserver with DB with AWS CDK/Cloudformation deployment.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## Setup
 
-## Useful commands
+```
+git clone https://github.com/jmeyers91/cdk-hello-world
+cd cdk-hello-world
+npm i
+npm run build
+npm run deploy
+```
 
- * `npm run build`   compile typescript to js
- * `npm run watch`   watch for changes and compile
- * `npm run test`    perform the jest unit tests
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk synth`       emits the synthesized CloudFormation template
+Or deploy to a different stack name:
+
+```
+STACK_NAME=foobar npm run deploy
+```
