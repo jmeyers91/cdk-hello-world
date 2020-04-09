@@ -17,3 +17,33 @@ Or deploy to a different stack name:
 ```
 STACK_NAME=foobar npm run deploy
 ```
+
+Working IAM policy:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "VisualEditor0",
+      "Effect": "Allow",
+      "Action": [
+        "s3:*",
+        "rds:*",
+        "ec2:*",
+        "cloudformation:*",
+        "logs:*",
+        "ecs:*",
+        "ecr:*",
+        "ssm:*",
+        "sns:*",
+        "elasticloadbalancing:*",
+        "iam:*",
+        "autoscaling:*",
+        "lambda:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+```
