@@ -10,8 +10,6 @@ import { Port, InstanceClass, InstanceSize } from "@aws-cdk/aws-ec2";
 const app = new cdk.App();
 const stack = new cdk.Stack(app, process.env.STACK_NAME || "HelloWorld");
 
-// Create VPC and Fargate Cluster
-// NOTE: Limit AZs to avoid reaching resource quotas
 const vpc = new ec2.Vpc(stack, "MyVpc", { maxAzs: 2 });
 const cluster = new ecs.Cluster(stack, "Cluster", { vpc });
 const databaseUser = "app";
@@ -38,11 +36,6 @@ const database = new rds.DatabaseInstance(stack, "Instance", {
   vpc,
 });
 
-// Instantiate Fargate Service with a cluster and a local image that gets
-// uploaded to an S3 staging bucket prior to being uploaded to ECR.
-// A new repository is created in ECR and the Fargate service is created
-// with the image from ECR.
-
 const apiService = new ecsPatterns.ApplicationLoadBalancedEc2Service(
   stack,
   "AppService",
@@ -61,23 +54,6 @@ const apiService = new ecsPatterns.ApplicationLoadBalancedEc2Service(
     },
   }
 );
-// const apiService = new ecsPatterns.ApplicationLoadBalancedFargateService(
-//   stack,
-//   "FargateService",
-//   {
-//     cluster,
-//     taskImageOptions: {
-//       environment: {
-//         PORT: "3000",
-//         DATABASE_URL: `postgres://${databaseUser}:${databasePassword}@${database.dbInstanceEndpointAddress}:${databasePort}/${databaseName}`,
-//       },
-//       containerPort: 3000,
-//       image: ecs.ContainerImage.fromAsset(
-//         path.resolve(__dirname, "..", "local-image")
-//       ),
-//     },
-//   }
-// );
 
 database.connections.allowFrom(apiService.service, Port.tcp(databasePort));
 
